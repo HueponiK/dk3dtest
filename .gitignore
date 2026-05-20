@@ -1,0 +1,11 @@
+build/
+.cache/
+*.o
+*.a
+*.d
+*.lst
+*.map
+*.elf
+*.nro
+*.nacp
+*.dksh
