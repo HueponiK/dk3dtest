@@ -127,7 +127,7 @@ $(NRO_OUT): $(OUT_LIB)
 	@echo ""
 	@echo "Built artifacts:"
 	@echo "  NRO  : $@"
-	@echo "  ELF  : $(TARGET).elf   (for addr2line — NRO base 0x08500000 in Ryujinx)"
+	@echo "  ELF  : $(TARGET).elf"
 	@echo "  Core : $(OUT_LIB)"
 
 clean:

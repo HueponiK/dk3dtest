@@ -1,0 +1,48 @@
+name: Build NRO
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  standalone:
+    name: Standalone NRO
+    runs-on: ubuntu-latest
+    container:
+      image: devkitpro/devkita64:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build standalone NRO
+        run: make -C standalone
+
+      - name: Upload standalone NRO
+        uses: actions/upload-artifact@v4
+        with:
+          name: dk3dtest_standalone
+          path: standalone/dk3dtest_standalone.nro
+
+  bundle:
+    name: Libretro Bundle NRO
+    runs-on: ubuntu-latest
+    container:
+      image: devkitpro/devkita64:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install git (for RetroArch clone)
+        run: |
+          apt-get update -qq
+          apt-get install -y -qq git
+
+      - name: Build libretro bundle NRO
+        run: make -C libretro bundle
+
+      - name: Upload bundle NRO
+        uses: actions/upload-artifact@v4
+        with:
+          name: dk3dtest_libretro_bundle
+          path: libretro/dk3dtest_libretro_libnx.nro
